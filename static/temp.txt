@@ -1,0 +1,2 @@
+It is not suggested to put faltu ko files on static folder . 
+you can directly acess the files on static folder with /static/filename .
