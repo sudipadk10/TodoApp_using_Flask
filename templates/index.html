@@ -62,17 +62,16 @@
             </div>
         </nav>
         <div class="container my-5">
-            <form>
+            <form action="/" method="POST">
                 <div class="mb-3">
                     <label for="todoTitle" class="form-label">Todo Title</label>
                     <input type="text" class="form-control"
-                        id="todoTitle">
+                        name="title" id="todoTitle">
                     
                 <div class="mb-3">
                     <label for="todoDescription"
                         class="form-label">Todo Description</label>
-                    <input type="text" class="form-control"
-                        id="todoDescription">
+                    <input type="text" class="form-control" name="desc"                       id="todoDescription">
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -83,30 +82,28 @@
                 <thead>
                     <tr>
                         <th scope="col">S.N.</th>
-                        <th scope="col">todoTitle</th>
-                        <th scope="col">todoDescription</th>  
-                        <th scope="col">status</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>  
+                        <th scope="col">Time</th>
+                        <th scope="col">Action</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
+                   {% for x in all_todo %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <th scope="row">{{loop.index}}</th>
+                        <td>{{x.title}}</td>
+                        <td>{{x.desc}}</td>
+                        <td>{{x.date_created }}</td>
+                        <td>
+                            <a href="/update/{{x.sn}}"><button type="button" class="btn btn-outline-success btn-sm mx-1">Update</button></a>
+                            <a href="/delete//{{x.sn}}"><button type="button" class="btn btn-outline-danger btn-sm mx-1">Delete</button></a>
+                        </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>@social</td>
-                    </tr>
+                    
+                   {% endfor %}
+                    
                 </tbody>
             </table>
         </div>
