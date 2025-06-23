@@ -39,11 +39,18 @@ def delete(s):
     return redirect('/')
     
 
-# @app.route('/update/<int:s>')
-# def update(s):
-#     todo = Todo.query.filter_by(sn=s).first()
-#     return render_template('update.html', todo = todo)
+@app.route('/update/<int:s>')
+def update(s):
+    todo = Todo.query.filter_by(sn=s).first()
+    return render_template('update.html', todo = todo)
 
+@app.route('/update/<int:s>', methods=['POST'])
+def final_update(s):
+    todo = Todo.query.get_or_404(s)
+    todo.title = request.form['title']
+    todo.desc = request.form['desc']
+    db.session.commit()
+    return redirect('/')
 
 
 if __name__ == '__main__':
