@@ -1,0 +1,1 @@
+console.log(`You are doing great . <script src="{{ url_for('static', filename='js/script.js') }}"></script> `)

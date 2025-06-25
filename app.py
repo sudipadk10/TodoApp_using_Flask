@@ -44,6 +44,7 @@ def update(s):
     todo = Todo.query.filter_by(sn=s).first()
     return render_template('update.html', todo = todo)
 
+
 @app.route('/update/<int:s>', methods=['POST'])
 def final_update(s):
     todo = Todo.query.get_or_404(s)
@@ -52,7 +53,24 @@ def final_update(s):
     db.session.commit()
     return redirect('/')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
+@app.route('/allProjects')
+def allProjects():
+    return render_template('allProjects.html')
+
+@app.route('/cybersecurity')
+def cybersecurity():
+    return render_template('cybersecurity.html')
+@app.route('/web')
+def web():
+    return render_template('web.html')
+@app.route('/others')
+def others():
+    return render_template('others.html')
+    
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  

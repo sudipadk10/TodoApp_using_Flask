@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Todo List</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script> 
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -11,9 +13,10 @@
             crossorigin="anonymous">
     </head>
     <body>
+        
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">MyToDo</a>
+                <a class="navbar-brand text-primary" href="#">MyToDo</a>
                 <button class="navbar-toggler" type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
@@ -29,33 +32,28 @@
                                 href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="/about">About</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#"
                                 role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Dropdown
+                                Projects
                             </a>
                             <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/allProjects">All Projects</a></li>
+                                        <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item"
-                                        href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another
-                                        action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something
-                                        else here</a></li>
+                                        href="/cybersecurity">Cybersecurity</a></li>
+                                <li><a class="dropdown-item" href="/web">Web Development</a></li>
+                                <li><a class="dropdown-item" href="/others">Others</a></li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled"
-                                aria-disabled="true">Disabled</a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search"
                             placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-outline-success"
+                        <button class="btn btn-outline-primary"
                             type="submit">Search</button>
                     </form>
                 </div>
@@ -77,6 +75,12 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+        {% if all_todo|length==0 %}
+            <div class="alert alert-warning" role="alert">
+  No Todos . Please add one !
+</div>
+        {% else %}
+            
         <div class="container my-5">
             <table class="table">
                 <thead>
@@ -98,7 +102,7 @@
                         <td>{{x.date_created }}</td>
                         <td>
                             <a href="/update/{{x.sn}}"><button type="button" class="btn btn-outline-success btn-sm mx-1">Update</button></a>
-                            <a href="/delete//{{x.sn}}"><button type="button" class="btn btn-outline-danger btn-sm mx-1">Delete</button></a>
+                            <a href="/delete/{{x.sn}}"><button type="button" class="btn btn-outline-danger btn-sm mx-1">Delete</button></a>
                         </td>
                     </tr>
                     
@@ -107,11 +111,13 @@
                 </tbody>
             </table>
         </div>
-        
+          {% endif %}
 
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
             crossorigin="anonymous"></script>
+            
+            
     </body>
 </html>
